@@ -90,8 +90,12 @@ project(":code/complex-number-calculator").name = "complex-number-calculator-mod
 // Купцова Алеся
 // Кучков Иван
 // Лапин Артем
-include "code/quadratic-equasion"
-project(":code/quadratic-equasion").name = "quadratic-equasion-Model"
+include "code/quadratic-equasion/Model"
+project(":code/quadratic-equasion/Model").name = "quadratic-equasion-Model"
+include "code/quadratic-equasion/ViewModel"
+project(":code/quadratic-equasion/ViewModel").name = "quadratic-equasion-ViewModel"
+include "code/quadratic-equasion/View"
+project(":code/quadratic-equasion/View").name = "quadratic-equasion-View"
 // Лахтачев Ярослав
 // Миронова Анна
 include "code/statistics-calculation"
