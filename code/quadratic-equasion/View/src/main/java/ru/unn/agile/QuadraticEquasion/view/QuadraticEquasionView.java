@@ -26,11 +26,11 @@ public class QuadraticEquasionView {
     void initialize() {
         viewModel = new QuadraticEquasionViewModel();
         btnCalc.disableProperty().bindBidirectional(viewModel.isCalculateButtonDisabled());
-        txtCoeffA.textProperty().bindBidirectional(viewModel.txtCoeffAProperty());
-        txtCoeffB.textProperty().bindBidirectional(viewModel.txtCoeffBProperty());
-        txtCoeffC.textProperty().bindBidirectional(viewModel.txtCoeffCProperty());
-        lblResult.textProperty().bindBidirectional(viewModel.lblResultProperty());
-        lblError.textProperty().bindBidirectional(viewModel.lblErrorProperty());
+        txtCoeffA.textProperty().bindBidirectional(viewModel.getTxtCoeffAProperty());
+        txtCoeffB.textProperty().bindBidirectional(viewModel.getTxtCoeffBProperty());
+        txtCoeffC.textProperty().bindBidirectional(viewModel.getTxtCoeffCProperty());
+        lblResult.textProperty().bindBidirectional(viewModel.getTxtResultProperty());
+        lblError.textProperty().bindBidirectional(viewModel.getTxtErrorProperty());
         btnCalc.setOnAction(event -> {
             viewModel.calculate();
         });

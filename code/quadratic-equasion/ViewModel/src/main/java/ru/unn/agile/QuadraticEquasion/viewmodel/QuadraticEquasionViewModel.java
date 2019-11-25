@@ -8,105 +8,97 @@ import ru.unn.agile.ComplexNumber.model.ComplexNumber;
 import ru.unn.agile.QuadraticEquasion.model.QuadraticEquasion;
 
 public class QuadraticEquasionViewModel {
-    private BooleanProperty btnCalcDisabled = new SimpleBooleanProperty();
-    private StringProperty txtCoeffA = new SimpleStringProperty();
-    private StringProperty txtCoeffB = new SimpleStringProperty();
-    private StringProperty txtCoeffC = new SimpleStringProperty();
-    private StringProperty lblResult = new SimpleStringProperty();
-    private StringProperty lblError = new SimpleStringProperty();
+    private BooleanProperty btnCalcDisabledProp = new SimpleBooleanProperty();
+    private StringProperty txtCoeffAProp = new SimpleStringProperty();
+    private StringProperty txtCoeffBProp = new SimpleStringProperty();
+    private StringProperty txtCoeffCProp = new SimpleStringProperty();
+    private StringProperty txtResultProp = new SimpleStringProperty();
+    private StringProperty getTxtErrorProp = new SimpleStringProperty();
 
     public QuadraticEquasionViewModel() {
-        btnCalcDisabled.setValue(true);
-        txtCoeffA.setValue("");
-        txtCoeffB.setValue("");
-        txtCoeffC.setValue("");
-        lblResult.setValue("");
-        lblError.setValue("");
+        btnCalcDisabledProp.setValue(true);
+        txtCoeffAProp.setValue("");
+        txtCoeffBProp.setValue("");
+        txtCoeffCProp.setValue("");
+        txtResultProp.setValue("");
+        getTxtErrorProp.setValue("");
 
-        txtCoeffA.addListener((observable, oldValue, newValue) -> {
-            inputValueA(newValue);
+        txtCoeffAProp.addListener((observable, oldValue, newValue) -> {
+            inputValue(txtCoeffAProp, newValue);
         });
-        txtCoeffB.addListener((observable, oldValue, newValue) -> {
-            inputValueB(newValue);
+        txtCoeffBProp.addListener((observable, oldValue, newValue) -> {
+            inputValue(txtCoeffBProp, newValue);
         });
-        txtCoeffC.addListener((observable, oldValue, newValue) -> {
-            inputValueC(newValue);
+        txtCoeffCProp.addListener((observable, oldValue, newValue) -> {
+            inputValue(txtCoeffCProp, newValue);
         });
     }
 
-    private void inputValueA(final String newValue) {
-        txtCoeffAProperty().setValue(newValue);
-        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty() || !canConvertToCoeffsDouble());
-    }
-
-    private void inputValueB(final String newValue) {
-        txtCoeffBProperty().setValue(newValue);
-        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty() || !canConvertToCoeffsDouble());
-    }
-
-    private void inputValueC(final String newValue) {
-        txtCoeffCProperty().setValue(newValue);
-        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty() || !canConvertToCoeffsDouble());
+    private void inputValue(final StringProperty property, final String newValue) {
+        property.setValue(newValue);
+        btnCalcDisabledProp.setValue(!txtFieldsNotIsEmpty() || !canConvertCoeffsToDouble());
     }
 
     public BooleanProperty isCalculateButtonDisabled() {
-        return btnCalcDisabled;
+        return btnCalcDisabledProp;
     }
 
-    public StringProperty txtCoeffAProperty() {
-        return txtCoeffA;
+    public StringProperty getTxtCoeffAProperty() {
+        return txtCoeffAProp;
     }
 
-    public StringProperty txtCoeffBProperty() {
-        return txtCoeffB;
+    public StringProperty getTxtCoeffBProperty() {
+        return txtCoeffBProp;
     }
 
-    public StringProperty txtCoeffCProperty() {
-        return txtCoeffC;
+    public StringProperty getTxtCoeffCProperty() {
+        return txtCoeffCProp;
     }
 
-    public StringProperty lblResultProperty() {
-        return lblResult;
+    public StringProperty getTxtResultProperty() {
+        return txtResultProp;
     }
 
     private boolean txtFieldsNotIsEmpty() {
-        return !txtCoeffAProperty().get().isEmpty()
-                && !txtCoeffBProperty().get().isEmpty()
-                && !txtCoeffCProperty().get().isEmpty();
+        return !getTxtCoeffAProperty().get().isEmpty()
+                && !getTxtCoeffBProperty().get().isEmpty()
+                && !getTxtCoeffCProperty().get().isEmpty();
     }
 
     public void calculate() {
         QuadraticEquasion qe;
-        lblError.setValue("");
+        getTxtErrorProp.setValue("");
         try {
-            qe = new QuadraticEquasion(Double.parseDouble(txtCoeffA.get()),
-                    Double.parseDouble(txtCoeffB.get()),
-                    Double.parseDouble(txtCoeffC.get()));
+            qe = new QuadraticEquasion(Double.parseDouble(txtCoeffAProp.get()),
+                    Double.parseDouble(txtCoeffBProp.get()),
+                    Double.parseDouble(txtCoeffCProp.get()));
         } catch (IllegalArgumentException e) {
-            lblError.setValue("Incorrect Input Data");
+            getTxtErrorProp.setValue("Incorrect Input Data");
             return;
         }
+        setTxtResultProp(qe.solve());
+    }
 
-        ComplexNumber[] result = qe.solve();
+    private void setTxtResultProp(final ComplexNumber[] result) {
         StringBuilder res = new StringBuilder();
         res.append("X1 = ").append(result[0]);
         if (result.length > 1) {
             res.append("; X2 = ").append(result[1]);
         }
-        lblResult.setValue(res.toString());
+        txtResultProp.setValue(res.toString());
     }
 
     private boolean canConvertToDouble(final String value) {
         return value.matches("[+-]?([0-9]*[.])?[0-9]+");
     }
 
-    private boolean canConvertToCoeffsDouble() {
-        return canConvertToDouble(txtCoeffA.get())
-                && canConvertToDouble(txtCoeffB.get())
-                && canConvertToDouble(txtCoeffC.get());
+    private boolean canConvertCoeffsToDouble() {
+        return canConvertToDouble(txtCoeffAProp.get())
+                && canConvertToDouble(txtCoeffBProp.get())
+                && canConvertToDouble(txtCoeffCProp.get());
     }
 
-    public StringProperty lblErrorProperty() {
-        return lblError;
+    public StringProperty getTxtErrorProperty() {
+        return getTxtErrorProp;
     }
 }

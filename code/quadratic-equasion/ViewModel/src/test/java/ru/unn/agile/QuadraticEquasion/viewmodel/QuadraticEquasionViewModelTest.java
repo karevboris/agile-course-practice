@@ -27,54 +27,57 @@ public class QuadraticEquasionViewModelTest {
 
     @Test
     public void afterInputCalcButtonIsEnabled() {
-        viewModel.txtCoeffAProperty().setValue("10");
-        viewModel.txtCoeffBProperty().setValue("10");
-        viewModel.txtCoeffCProperty().setValue("10");
+        viewModel.getTxtCoeffAProperty().setValue("10");
+        viewModel.getTxtCoeffBProperty().setValue("10");
+        viewModel.getTxtCoeffCProperty().setValue("10");
         assertFalse(viewModel.isCalculateButtonDisabled().get());
     }
 
     @Test
     public void afterInputNotAllDataCalcButtonIsDisabled() {
-        viewModel.txtCoeffAProperty().setValue("10");
+        viewModel.getTxtCoeffAProperty().setValue("10");
         assertTrue(viewModel.isCalculateButtonDisabled().get());
     }
 
     @Test
     public void afterCleanButtonIsDisabled() {
-        viewModel.txtCoeffAProperty().setValue("10");
-        viewModel.txtCoeffBProperty().setValue("10");
-        viewModel.txtCoeffCProperty().setValue("10");
-        viewModel.txtCoeffAProperty().setValue("");
+        viewModel.getTxtCoeffAProperty().setValue("10");
+        viewModel.getTxtCoeffBProperty().setValue("10");
+        viewModel.getTxtCoeffCProperty().setValue("10");
+        viewModel.getTxtCoeffAProperty().setValue("");
         assertTrue(viewModel.isCalculateButtonDisabled().get());
     }
 
     @Test
     public void canCalculateByClick() {
-        viewModel.txtCoeffAProperty().setValue("2");
-        viewModel.txtCoeffBProperty().setValue("2");
-        viewModel.txtCoeffCProperty().setValue("-4");
+        viewModel.getTxtCoeffAProperty().setValue("2");
+        viewModel.getTxtCoeffBProperty().setValue("2");
+        viewModel.getTxtCoeffCProperty().setValue("-4");
 
         viewModel.calculate();
         ComplexNumber[] solution = new ComplexNumber[2];
         solution[0] = new ComplexNumber(1, 0);
         solution[1] = new ComplexNumber(-2, 0);
-        assertEquals("X1 = " + solution[0] + "; X2 = " + solution[1], viewModel.lblResultProperty().get());
+        assertEquals(
+                "X1 = " + solution[0] + "; X2 = " + solution[1],
+                viewModel.getTxtResultProperty().get()
+        );
     }
 
     @Test
     public void getErrorWhenInputIsNumbersButIncorrect() {
-        viewModel.txtCoeffAProperty().setValue("0");
-        viewModel.txtCoeffBProperty().setValue("0");
-        viewModel.txtCoeffCProperty().setValue("10");
+        viewModel.getTxtCoeffAProperty().setValue("0");
+        viewModel.getTxtCoeffBProperty().setValue("0");
+        viewModel.getTxtCoeffCProperty().setValue("10");
         viewModel.calculate();
-        assertEquals("Incorrect Input Data", viewModel.lblErrorProperty().get());
+        assertEquals("Incorrect Input Data", viewModel.getTxtErrorProperty().get());
     }
 
     @Test
     public void calcButtonIsDisabledWhenNotNumbersInput() {
-        viewModel.txtCoeffAProperty().setValue("abc");
-        viewModel.txtCoeffBProperty().setValue("0");
-        viewModel.txtCoeffCProperty().setValue("10");
+        viewModel.getTxtCoeffAProperty().setValue("abc");
+        viewModel.getTxtCoeffBProperty().setValue("0");
+        viewModel.getTxtCoeffCProperty().setValue("10");
         assertTrue(viewModel.isCalculateButtonDisabled().get());
     }
 }
