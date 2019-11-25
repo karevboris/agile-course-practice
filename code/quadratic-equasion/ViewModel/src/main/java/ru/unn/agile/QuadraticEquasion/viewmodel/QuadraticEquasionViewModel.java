@@ -4,12 +4,15 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import ru.unn.agile.ComplexNumber.model.ComplexNumber;
+import ru.unn.agile.QuadraticEquasion.model.QuadraticEquasion;
 
 public class QuadraticEquasionViewModel {
     private BooleanProperty btnCalcDisabled = new SimpleBooleanProperty();
     private StringProperty txtCoeffA = new SimpleStringProperty();
     private StringProperty txtCoeffB = new SimpleStringProperty();
     private StringProperty txtCoeffC = new SimpleStringProperty();
+    private StringProperty lblResult = new SimpleStringProperty();
 
     public QuadraticEquasionViewModel() {
         btnCalcDisabled.setValue(true);
@@ -58,9 +61,27 @@ public class QuadraticEquasionViewModel {
         return txtCoeffC;
     }
 
+    public StringProperty lblResultProperty() {
+        return lblResult;
+    }
+
     private boolean txtFieldsNotIsEmpty() {
         return !txtCoeffAProperty().get().isEmpty()
                 && !txtCoeffBProperty().get().isEmpty()
                 && !txtCoeffCProperty().get().isEmpty();
+    }
+
+    public void calculate() {
+        QuadraticEquasion qe = new QuadraticEquasion(Double.parseDouble(txtCoeffA.get()),
+                Double.parseDouble(txtCoeffB.get()),
+                Double.parseDouble(txtCoeffC.get()));
+
+        ComplexNumber[] result = qe.solve();
+        StringBuilder res = new StringBuilder();
+        res.append("X1 = ").append(result[0]);
+        if (result.length>1) {
+            res.append("; X2 = ").append(result[1]);
+        }
+        lblResult.setValue(res.toString());
     }
 }
