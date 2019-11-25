@@ -60,4 +60,21 @@ public class QuadraticEquasionViewModelTest {
         solution[1] = new ComplexNumber(-2, 0);
         assertEquals("X1 = " + solution[0] + "; X2 = " + solution[1], viewModel.lblResultProperty().get());
     }
+
+    @Test
+    public void getErrorWhenInputIsNumbersButIncorrect() {
+        viewModel.txtCoeffAProperty().setValue("0");
+        viewModel.txtCoeffBProperty().setValue("0");
+        viewModel.txtCoeffCProperty().setValue("10");
+        viewModel.calculate();
+        assertEquals("Incorrect Input Data", viewModel.lblErrorProperty().get());
+    }
+
+    @Test
+    public void calcButtonIsDisabledWhenNotNumbersInput() {
+        viewModel.txtCoeffAProperty().setValue("abc");
+        viewModel.txtCoeffBProperty().setValue("0");
+        viewModel.txtCoeffCProperty().setValue("10");
+        assertTrue(viewModel.isCalculateButtonDisabled().get());
+    }
 }

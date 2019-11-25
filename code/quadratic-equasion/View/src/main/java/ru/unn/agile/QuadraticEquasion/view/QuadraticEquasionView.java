@@ -19,6 +19,8 @@ public class QuadraticEquasionView {
     private TextField txtCoeffC;
     @FXML
     private Label lblResult;
+    @FXML
+    private Label lblError;
 
     @FXML
     void initialize() {
@@ -28,6 +30,7 @@ public class QuadraticEquasionView {
         txtCoeffB.textProperty().bindBidirectional(viewModel.txtCoeffBProperty());
         txtCoeffC.textProperty().bindBidirectional(viewModel.txtCoeffCProperty());
         lblResult.textProperty().bindBidirectional(viewModel.lblResultProperty());
+        lblError.textProperty().bindBidirectional(viewModel.lblErrorProperty());
         btnCalc.setOnAction(event -> {
             viewModel.calculate();
         });

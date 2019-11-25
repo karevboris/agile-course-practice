@@ -13,12 +13,16 @@ public class QuadraticEquasionViewModel {
     private StringProperty txtCoeffB = new SimpleStringProperty();
     private StringProperty txtCoeffC = new SimpleStringProperty();
     private StringProperty lblResult = new SimpleStringProperty();
+    private StringProperty lblError = new SimpleStringProperty();
 
     public QuadraticEquasionViewModel() {
         btnCalcDisabled.setValue(true);
         txtCoeffA.setValue("");
         txtCoeffB.setValue("");
         txtCoeffC.setValue("");
+        lblResult.setValue("");
+        lblError.setValue("");
+
         txtCoeffA.addListener((observable, oldValue, newValue) -> {
             inputValueA(newValue);
         });
@@ -32,17 +36,17 @@ public class QuadraticEquasionViewModel {
 
     private void inputValueA(final String newValue) {
         txtCoeffAProperty().setValue(newValue);
-        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty());
+        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty() || !canConvertToCoeffsDouble());
     }
 
     private void inputValueB(final String newValue) {
         txtCoeffBProperty().setValue(newValue);
-        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty());
+        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty() || !canConvertToCoeffsDouble());
     }
 
     private void inputValueC(final String newValue) {
         txtCoeffCProperty().setValue(newValue);
-        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty());
+        btnCalcDisabled.setValue(!txtFieldsNotIsEmpty() || !canConvertToCoeffsDouble());
     }
 
     public BooleanProperty isCalculateButtonDisabled() {
@@ -72,16 +76,37 @@ public class QuadraticEquasionViewModel {
     }
 
     public void calculate() {
-        QuadraticEquasion qe = new QuadraticEquasion(Double.parseDouble(txtCoeffA.get()),
-                Double.parseDouble(txtCoeffB.get()),
-                Double.parseDouble(txtCoeffC.get()));
+        QuadraticEquasion qe;
+        lblError.setValue("");
+        try {
+            qe = new QuadraticEquasion(Double.parseDouble(txtCoeffA.get()),
+                    Double.parseDouble(txtCoeffB.get()),
+                    Double.parseDouble(txtCoeffC.get()));
+        } catch (IllegalArgumentException e) {
+            lblError.setValue("Incorrect Input Data");
+            return;
+        }
 
         ComplexNumber[] result = qe.solve();
         StringBuilder res = new StringBuilder();
         res.append("X1 = ").append(result[0]);
-        if (result.length>1) {
+        if (result.length > 1) {
             res.append("; X2 = ").append(result[1]);
         }
         lblResult.setValue(res.toString());
+    }
+
+    private boolean canConvertToDouble(final String value) {
+        return value.matches("[+-]?([0-9]*[.])?[0-9]+");
+    }
+
+    private boolean canConvertToCoeffsDouble() {
+        return canConvertToDouble(txtCoeffA.get())
+                && canConvertToDouble(txtCoeffB.get())
+                && canConvertToDouble(txtCoeffC.get());
+    }
+
+    public StringProperty lblErrorProperty() {
+        return lblError;
     }
 }
