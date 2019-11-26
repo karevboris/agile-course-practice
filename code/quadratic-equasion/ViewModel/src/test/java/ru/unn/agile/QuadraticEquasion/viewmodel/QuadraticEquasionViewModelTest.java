@@ -80,4 +80,55 @@ public class QuadraticEquasionViewModelTest {
         viewModel.getTxtCoeffCProperty().setValue("10");
         assertTrue(viewModel.isCalculateButtonDisabled().get());
     }
+
+    @Test
+    public void canOutputWhenOneSolution() {
+        viewModel.getTxtCoeffAProperty().setValue("0");
+        viewModel.getTxtCoeffBProperty().setValue("3");
+        viewModel.getTxtCoeffCProperty().setValue("-9");
+
+        viewModel.calculate();
+        ComplexNumber[] solution = new ComplexNumber[1];
+        solution[0] = new ComplexNumber(3, 0);
+        assertEquals(
+                "X1 = " + solution[0],
+                viewModel.getTxtResultProperty().get()
+        );
+    }
+
+    @Test
+    public void canCleanErrorLabelAfterInputCorrectData() {
+        viewModel.getTxtCoeffAProperty().setValue("0");
+        viewModel.getTxtCoeffBProperty().setValue("0");
+        viewModel.getTxtCoeffCProperty().setValue("10");
+        viewModel.calculate();
+        viewModel.getTxtCoeffAProperty().setValue("10");
+        viewModel.calculate();
+        assertEquals("", viewModel.getTxtErrorProperty().get());
+    }
+
+    @Test
+    public void canEnabledCalcButtonAfterChangeIncorrectCoeff() {
+        viewModel.getTxtCoeffAProperty().setValue("abc");
+        viewModel.getTxtCoeffBProperty().setValue("0");
+        viewModel.getTxtCoeffCProperty().setValue("10");
+        viewModel.getTxtCoeffAProperty().setValue("10");
+        assertFalse(viewModel.isCalculateButtonDisabled().get());
+    }
+
+    @Test
+    public void canParseAndCalculateWithDoubleValue() {
+        viewModel.getTxtCoeffAProperty().setValue("0.2");
+        viewModel.getTxtCoeffBProperty().setValue("0.2");
+        viewModel.getTxtCoeffCProperty().setValue("-0.4");
+
+        viewModel.calculate();
+        ComplexNumber[] solution = new ComplexNumber[2];
+        solution[0] = new ComplexNumber(1, 0);
+        solution[1] = new ComplexNumber(-2, 0);
+        assertEquals(
+                "X1 = " + solution[0] + "; X2 = " + solution[1],
+                viewModel.getTxtResultProperty().get()
+        );
+    }
 }

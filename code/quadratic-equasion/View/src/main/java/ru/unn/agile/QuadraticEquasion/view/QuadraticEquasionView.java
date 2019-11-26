@@ -24,7 +24,6 @@ public class QuadraticEquasionView {
 
     @FXML
     void initialize() {
-        viewModel = new QuadraticEquasionViewModel();
         btnCalc.disableProperty().bindBidirectional(viewModel.isCalculateButtonDisabled());
         txtCoeffA.textProperty().bindBidirectional(viewModel.getTxtCoeffAProperty());
         txtCoeffB.textProperty().bindBidirectional(viewModel.getTxtCoeffBProperty());
