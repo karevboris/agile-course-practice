@@ -4,6 +4,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class MortgageCalculatorViewModelTests {
@@ -24,7 +26,9 @@ public class MortgageCalculatorViewModelTests {
 
     @Before
     public void setUp() {
-        viewModel = new MortgageCalculatorViewModel();
+        if (viewModel == null) {
+            viewModel = new MortgageCalculatorViewModel(new MortgageCalculatorFakeLogger());
+        }
     }
 
     @After

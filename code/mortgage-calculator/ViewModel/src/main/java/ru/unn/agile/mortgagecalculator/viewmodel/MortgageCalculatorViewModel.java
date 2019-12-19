@@ -15,6 +15,8 @@ import ru.unn.agile.mortgagecalculator.model.parameters.monthlycommission.Percen
 import ru.unn.agile.mortgagecalculator.model.report.MortgageMonthReport;
 import ru.unn.agile.mortgagecalculator.model.report.MortgageReport;
 
+import java.util.List;
+
 
 public class MortgageCalculatorViewModel {
     private StringProperty apartmentPrice = new SimpleStringProperty();
@@ -44,7 +46,7 @@ public class MortgageCalculatorViewModel {
 
     public MortgageCalculatorViewModel(final MortgageCalculatorILogger logger) {
         setLogger(logger);
-        this.logger = logger;
+        init();
     }
 
     private void init() {
@@ -340,5 +342,9 @@ public class MortgageCalculatorViewModel {
                 + "; With month payment " + monthReport.getPayment() + " for "
                 + "" + mortgageParameters.getMonthsPeriod() + " months.";
         this.result.set(resultString);
+    }
+
+    public List<String> getLog() {
+        return logger.getLog();
     }
 }
