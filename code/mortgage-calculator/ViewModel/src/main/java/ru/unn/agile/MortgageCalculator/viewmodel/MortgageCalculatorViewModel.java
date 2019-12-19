@@ -29,7 +29,25 @@ public class MortgageCalculatorViewModel {
     private StringProperty typeOfPayment = new SimpleStringProperty();
     private StringProperty result = new SimpleStringProperty();
 
+    private MortgageCalculatorILogger logger;
+
+    public void setLogger(final MortgageCalculatorILogger logger) {
+        if (logger == null) {
+            throw new IllegalArgumentException("Logger parameter can't be null");
+        }
+        this.logger = logger;
+    }
+
     public MortgageCalculatorViewModel() {
+        init();
+    }
+
+    public MortgageCalculatorViewModel(final MortgageCalculatorILogger logger) {
+        setLogger(logger);
+        this.logger = logger;
+    }
+
+    private void init() {
         apartmentPrice.set("");
         firstPayment.set("");
         loanPeriod.set("");

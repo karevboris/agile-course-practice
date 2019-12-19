@@ -244,4 +244,16 @@ public class MortgageCalculatorViewModelTests {
 
         assertEquals("Incorrect input", viewModel.getResult());
     }
+
+    @Test
+    public void viewModelConstructorThrowsExceptionWithNullLogger() {
+        try {
+            new MortgageCalculatorViewModel(null);
+            fail("Exception wasn't thrown");
+        } catch (IllegalArgumentException ex) {
+            assertEquals("Logger parameter can't be null", ex.getMessage());
+        } catch (Exception ex) {
+            fail("Invalid exception type");
+        }
+    }
 }
