@@ -19,9 +19,10 @@ public class MortgageCalculatorViewModelTests {
         viewModel.interestRateProperty().set("3");
         viewModel.monthlyComissionsProperty().set("1");
         viewModel.monthlyComissionsTypeProperty().set("Rubles");
-        viewModel.oneTimeComisionsProperty().set("2");
-        viewModel.oneTimeComisionsTypeProperty().set("Percent");
+        viewModel.oneTimeComissionsProperty().set("2");
+        viewModel.oneTimeComissionsTypeProperty().set("Percent");
         viewModel.typeOfPaymentProperty().set("Annuity");
+        viewModel.getLog().clear();
     }
 
     @Before
@@ -45,8 +46,8 @@ public class MortgageCalculatorViewModelTests {
         assertEquals("", viewModel.getLoanPeriodType());
         assertEquals("", viewModel.getMonthlyComissions());
         assertEquals("", viewModel.getMonthlyComissionsType());
-        assertEquals("", viewModel.getOneTimeComisions());
-        assertEquals("", viewModel.getOneTimeComisionsType());
+        assertEquals("", viewModel.getOneTimeComissions());
+        assertEquals("", viewModel.getOneTimeComissionsType());
         assertEquals("", viewModel.getTypeOfPayment());
     }
 
@@ -178,9 +179,9 @@ public class MortgageCalculatorViewModelTests {
     }
 
     @Test
-    public void cantCalculateWithEmptyOneTimeComisionsProperty() {
+    public void cantCalculateWithEmptyOneTimeComissionsProperty() {
         setCorrectInputs();
-        viewModel.oneTimeComisionsProperty().set("");
+        viewModel.oneTimeComissionsProperty().set("");
 
         viewModel.calculate();
 
@@ -188,9 +189,9 @@ public class MortgageCalculatorViewModelTests {
     }
 
     @Test
-    public void cantCalculateWithEmptyOneTimeComisionsTypeProperty() {
+    public void cantCalculateWithEmptyOneTimeComissionsTypeProperty() {
         setCorrectInputs();
-        viewModel.oneTimeComisionsTypeProperty().set("");
+        viewModel.oneTimeComissionsTypeProperty().set("");
 
         viewModel.calculate();
 
@@ -259,5 +260,70 @@ public class MortgageCalculatorViewModelTests {
         } catch (Exception ex) {
             fail("Invalid exception type");
         }
+    }
+
+    @Test
+    public void logIsEmptyInTheBeginning() {
+        List<String> log = viewModel.getLog();
+        assertTrue(log.isEmpty());
+    }
+
+    @Test
+    public void logContainsProperMessageAfterCalculation() {
+        setCorrectInputs();
+        viewModel.calculate();
+        String message = viewModel.getLog().get(0);
+
+        assertTrue(message.matches(
+                ".*" + MortgageCalculatorViewModel.LogMessages.CALCULATE_WAS_PRESSED + ".*"
+        ));
+    }
+
+    @Test
+    public void logContainsInputArgumentsAfterCalculation() {
+        setCorrectInputs();
+
+        viewModel.calculate();
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(".*" + viewModel.getApartmentPrice()
+                + ".*" + viewModel.getFirstPayment()
+                + ".*" + viewModel.getInterestRate()
+                + ".*" + viewModel.getLoanPeriod()
+                + ".*" + viewModel.getLoanPeriodType()
+                + ".*" + viewModel.getMonthlyComissions()
+                + ".*" + viewModel.getMonthlyComissionsType()
+                + ".*" + viewModel.getOneTimeComissions()
+                + ".*" + viewModel.getOneTimeComissionsType()
+                + ".*" + viewModel.getTypeOfPayment() + ".*"));
+    }
+
+    @Test
+    public void canPutSeveralLogMessages() {
+        setCorrectInputs();
+
+        viewModel.calculate();
+        viewModel.calculate();
+
+        assertEquals(2, viewModel.getLog().size());
+    }
+
+    @Test
+    public void calculateIsNotCalledWhenButtonIsDisabled() {
+        viewModel.calculate();
+
+        assertTrue(viewModel.getLog().isEmpty());
+    }
+
+    @Test
+    public void canSeeLoanPeriodTypeChangeInLog() {
+        setCorrectInputs();
+
+        viewModel.loanPeriodTypeProperty().set("Year");
+
+        String message = viewModel.getLog().get(0);
+        assertTrue(message.matches(
+                ".*" + MortgageCalculatorViewModel.LogMessages.LOAN_PERIOD_TYPE_WAS_CHANGED + ".*"
+        ));
     }
 }

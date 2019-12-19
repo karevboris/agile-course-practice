@@ -40,13 +40,13 @@ public class MortgageCalculatorView {
         loanPeriod.textProperty().bindBidirectional(viewModel.loanPeriodProperty());
         interestRate.textProperty().bindBidirectional(viewModel.interestRateProperty());
         mothlyComissions.textProperty().bindBidirectional(viewModel.monthlyComissionsProperty());
-        oneTimeComissions.textProperty().bindBidirectional(viewModel.oneTimeComisionsProperty());
+        oneTimeComissions.textProperty().bindBidirectional(viewModel.oneTimeComissionsProperty());
         result.textProperty().bindBidirectional(viewModel.resultProperty());
         loanPeriodType.valueProperty().bindBidirectional(viewModel.loanPeriodTypeProperty());
         mothlyComissionType.valueProperty().bindBidirectional(
                 viewModel.monthlyComissionsTypeProperty());
         oneTimeComissionType.valueProperty().bindBidirectional(
-                viewModel.oneTimeComisionsTypeProperty());
+                viewModel.oneTimeComissionsTypeProperty());
         typeOfPayment.valueProperty().bindBidirectional(viewModel.typeOfPaymentProperty());
         calculate.setOnAction(event -> viewModel.calculate());
     }
