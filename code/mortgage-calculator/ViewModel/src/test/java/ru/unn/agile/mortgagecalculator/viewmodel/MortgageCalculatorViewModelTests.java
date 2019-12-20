@@ -22,13 +22,12 @@ public class MortgageCalculatorViewModelTests {
         viewModel.oneTimeCommissionsProperty().set("2");
         viewModel.oneTimeCommissionsTypeProperty().set("Percent");
         viewModel.typeOfPaymentProperty().set("Annuity");
-        viewModel.getLog().clear();
     }
 
     @Before
     public void setUp() {
         if (viewModel == null) {
-            viewModel = new MortgageCalculatorViewModel(new MortgageCalculatorFakeLogger());
+            //viewModel = new MortgageCalculatorViewModel(new MortgageCalculatorFakeLogger());
         }
     }
 
@@ -49,6 +48,10 @@ public class MortgageCalculatorViewModelTests {
         assertEquals("", viewModel.getOneTimeCommissions());
         assertEquals("", viewModel.getOneTimeCommissionsType());
         assertEquals("", viewModel.getTypeOfPayment());
+    }
+
+    public void setExternalViewModel(final MortgageCalculatorViewModel viewModel) {
+        this.viewModel = viewModel;
     }
 
     @Test
@@ -272,7 +275,7 @@ public class MortgageCalculatorViewModelTests {
     public void logContainsProperMessageAfterCalculation() {
         setCorrectInputs();
         viewModel.calculate();
-        String message = viewModel.getLog().get(0);
+        String message = viewModel.getLog().get(3);
 
         assertTrue(message.matches(
                 ".*" + MortgageCalculatorViewModel.LogMessages.CALCULATE_WAS_PRESSED + ".*"
@@ -285,7 +288,7 @@ public class MortgageCalculatorViewModelTests {
 
         viewModel.calculate();
 
-        String message = viewModel.getLog().get(0);
+        String message = viewModel.getLog().get(3);
         assertTrue(message.matches(".*" + viewModel.getApartmentPrice()
                 + ".*" + viewModel.getFirstPayment()
                 + ".*" + viewModel.getInterestRate()
@@ -305,7 +308,7 @@ public class MortgageCalculatorViewModelTests {
         viewModel.calculate();
         viewModel.calculate();
 
-        assertEquals(2, viewModel.getLog().size());
+        assertEquals(5, viewModel.getLog().size());
     }
 
     @Test
@@ -321,9 +324,34 @@ public class MortgageCalculatorViewModelTests {
 
         viewModel.loanPeriodTypeProperty().set("Year");
 
-        String message = viewModel.getLog().get(0);
+        String message = viewModel.getLog().get(3);
         assertTrue(message.matches(
                 ".*" + MortgageCalculatorViewModel.LogMessages.LOAN_PERIOD_TYPE_WAS_CHANGED + ".*"
+        ));
+    }
+
+    @Test
+    public void canSeeOneTimeCommissionTypeChangeInLog() {
+        setCorrectInputs();
+
+        viewModel.oneTimeCommissionsTypeProperty().set("Rubles");
+
+        String message = viewModel.getLog().get(3);
+        assertTrue(message.matches(".*" + MortgageCalculatorViewModel.
+                        LogMessages.ONE_TIME_COMMISSIONS_TYPE_WAS_CHANGED + ".*"
+        ));
+    }
+
+    @Test
+    public void canSeeMonthlyCommissionTypeChangeInLog() {
+        setCorrectInputs();
+
+        viewModel.monthlyCommissionsTypeProperty().set("Percent");
+
+        String message = viewModel.getLog().get(3);
+        assertTrue(message.matches(
+                ".*" + MortgageCalculatorViewModel.
+                        LogMessages.MONTHLY_COMMISSIONS_TYPE_WAS_CHANGED + ".*"
         ));
     }
 }

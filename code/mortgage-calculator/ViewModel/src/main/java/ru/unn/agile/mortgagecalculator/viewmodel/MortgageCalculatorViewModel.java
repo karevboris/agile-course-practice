@@ -124,10 +124,20 @@ public class MortgageCalculatorViewModel {
         });
 
         monthlyCommissionsType.addListener((observable, oldValue, newValue) -> {
+            StringBuilder message =
+                    new StringBuilder(LogMessages.MONTHLY_COMMISSIONS_TYPE_WAS_CHANGED);
+            message.append("Monthly Commissions change to: ").append(newValue).append(".");
+            logger.log(message.toString());
+            updateLogs();
             onTypeChange();
         });
 
         oneTimeCommissionsType.addListener((observable, oldValue, newValue) -> {
+            StringBuilder message =
+                    new StringBuilder(LogMessages.ONE_TIME_COMMISSIONS_TYPE_WAS_CHANGED);
+            message.append("One Time Commissions change to: ").append(newValue).append(".");
+            logger.log(message.toString());
+            updateLogs();
             onTypeChange();
         });
 
@@ -367,6 +377,10 @@ public class MortgageCalculatorViewModel {
         return logger.getLog();
     }
 
+    public final String getLogs() {
+        return logs.get();
+    }
+
     private void updateLogs() {
         List<String> fullLog = logger.getLog();
         String record = new String("");
@@ -384,7 +398,6 @@ public class MortgageCalculatorViewModel {
                 "One Time Commissions Type was changed to ";
         public static final String MONTHLY_COMMISSIONS_TYPE_WAS_CHANGED =
                 "Monthly Commissions Type was changed to ";
-        public static final String INCORRECT_INPUT = "Incorrect input. ";
 
         private LogMessages() {
         }

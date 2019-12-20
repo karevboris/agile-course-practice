@@ -234,6 +234,9 @@ project(":code/mortgage-calculator/View").name = "mortgage-calculator-View"
 
 include "code/mortgage-calculator/ViewModel"
 project(":code/mortgage-calculator/ViewModel").name = "mortgage-calculator-ViewModel"
+
+include "code/mortgage-calculator/Infrastructure"
+project(":code/mortgage-calculator/Infrastructure").name = "mortgage-calculator-Infrastructure"
 // Шумихин Сергей
 include "code/binary-tree/Model"
 project(":code/binary-tree/Model").name = "binary-tree-Model"

@@ -2,6 +2,7 @@ package ru.unn.agile.mortgagecalculator.view;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import ru.unn.agile.mortgagecalculator.infrastructure.MortgageCalculatorTxtLogger;
 import ru.unn.agile.mortgagecalculator.viewmodel.MortgageCalculatorViewModel;
 
 public class MortgageCalculatorView {
@@ -35,6 +36,7 @@ public class MortgageCalculatorView {
 
     @FXML
     void initialize() {
+        viewModel.setLogger(new MortgageCalculatorTxtLogger("./MortgageCalculatorTxtLogger.log"));
         apartmentPrice.textProperty().bindBidirectional(viewModel.apartmentPriceProperty());
         firstPayment.textProperty().bindBidirectional(viewModel.firstPaymentProperty());
         loanPeriod.textProperty().bindBidirectional(viewModel.loanPeriodProperty());
