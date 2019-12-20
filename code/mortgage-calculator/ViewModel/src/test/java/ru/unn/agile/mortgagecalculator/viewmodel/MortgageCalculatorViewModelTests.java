@@ -27,7 +27,7 @@ public class MortgageCalculatorViewModelTests {
     @Before
     public void setUp() {
         if (viewModel == null) {
-            //viewModel = new MortgageCalculatorViewModel(new MortgageCalculatorFakeLogger());
+            viewModel = new MortgageCalculatorViewModel(new MortgageCalculatorFakeLogger());
         }
     }
 

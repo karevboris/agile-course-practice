@@ -33,6 +33,8 @@ public class MortgageCalculatorView {
     private ChoiceBox<String> typeOfPayment;
     @FXML
     private Button calculate;
+    @FXML
+    public TextArea areaLog;
 
     @FXML
     void initialize() {
@@ -51,5 +53,6 @@ public class MortgageCalculatorView {
                 viewModel.oneTimeCommissionsTypeProperty());
         typeOfPayment.valueProperty().bindBidirectional(viewModel.typeOfPaymentProperty());
         calculate.setOnAction(event -> viewModel.calculate());
+        areaLog.textProperty().bindBidirectional(viewModel.logsProperty());
     }
 }

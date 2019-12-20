@@ -381,6 +381,10 @@ public class MortgageCalculatorViewModel {
         return logs.get();
     }
 
+    public StringProperty logsProperty() {
+        return logs;
+    }
+
     private void updateLogs() {
         List<String> fullLog = logger.getLog();
         String record = new String("");
