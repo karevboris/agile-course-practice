@@ -24,10 +24,10 @@ public class MortgageCalculatorViewModel {
     private StringProperty loanPeriod = new SimpleStringProperty();
     private StringProperty loanPeriodType = new SimpleStringProperty();
     private StringProperty interestRate = new SimpleStringProperty();
-    private StringProperty oneTimeComissions = new SimpleStringProperty();
-    private StringProperty oneTimeComissionsType = new SimpleStringProperty();
-    private StringProperty monthlyComissions = new SimpleStringProperty();
-    private StringProperty monthlyComissionsType = new SimpleStringProperty();
+    private StringProperty oneTimeCommissions = new SimpleStringProperty();
+    private StringProperty oneTimeCommissionsType = new SimpleStringProperty();
+    private StringProperty monthlyCommissions = new SimpleStringProperty();
+    private StringProperty monthlyCommissionsType = new SimpleStringProperty();
     private StringProperty typeOfPayment = new SimpleStringProperty();
     private StringProperty result = new SimpleStringProperty();
     private final StringProperty logs = new SimpleStringProperty();
@@ -56,10 +56,10 @@ public class MortgageCalculatorViewModel {
         loanPeriod.set("");
         loanPeriodType.set("");
         interestRate.set("");
-        oneTimeComissions.set("");
-        oneTimeComissionsType.set("");
-        monthlyComissions.set("");
-        monthlyComissionsType.set("");
+        oneTimeCommissions.set("");
+        oneTimeCommissionsType.set("");
+        monthlyCommissions.set("");
+        monthlyCommissionsType.set("");
         typeOfPayment.set("");
         result.set("");
 
@@ -95,7 +95,7 @@ public class MortgageCalculatorViewModel {
             }
         });
 
-        oneTimeComissions.addListener((observable, oldValue, newValue) -> {
+        oneTimeCommissions.addListener((observable, oldValue, newValue) -> {
             if (checkInput()) {
                 result.set("");
             } else {
@@ -103,7 +103,7 @@ public class MortgageCalculatorViewModel {
             }
         });
 
-        monthlyComissions.addListener((observable, oldValue, newValue) -> {
+        monthlyCommissions.addListener((observable, oldValue, newValue) -> {
             if (checkInput()) {
                 result.set("");
             } else {
@@ -123,11 +123,11 @@ public class MortgageCalculatorViewModel {
             onTypeChange();
         });
 
-        monthlyComissionsType.addListener((observable, oldValue, newValue) -> {
+        monthlyCommissionsType.addListener((observable, oldValue, newValue) -> {
             onTypeChange();
         });
 
-        oneTimeComissionsType.addListener((observable, oldValue, newValue) -> {
+        oneTimeCommissionsType.addListener((observable, oldValue, newValue) -> {
             onTypeChange();
         });
 
@@ -207,36 +207,36 @@ public class MortgageCalculatorViewModel {
         return interestRate;
     }
 
-    public String getOneTimeComissions() {
-        return oneTimeComissions.get();
+    public String getOneTimeCommissions() {
+        return oneTimeCommissions.get();
     }
 
-    public StringProperty oneTimeComissionsProperty() {
-        return oneTimeComissions;
+    public StringProperty oneTimeCommissionsProperty() {
+        return oneTimeCommissions;
     }
 
-    public String getOneTimeComissionsType() {
-        return oneTimeComissionsType.get();
+    public String getOneTimeCommissionsType() {
+        return oneTimeCommissionsType.get();
     }
 
-    public StringProperty oneTimeComissionsTypeProperty() {
-        return oneTimeComissionsType;
+    public StringProperty oneTimeCommissionsTypeProperty() {
+        return oneTimeCommissionsType;
     }
 
-    public String getMonthlyComissions() {
-        return monthlyComissions.get();
+    public String getMonthlyCommissions() {
+        return monthlyCommissions.get();
     }
 
-    public StringProperty monthlyComissionsProperty() {
-        return monthlyComissions;
+    public StringProperty monthlyCommissionsProperty() {
+        return monthlyCommissions;
     }
 
-    public String getMonthlyComissionsType() {
-        return monthlyComissionsType.get();
+    public String getMonthlyCommissionsType() {
+        return monthlyCommissionsType.get();
     }
 
-    public StringProperty monthlyComissionsTypeProperty() {
-        return monthlyComissionsType;
+    public StringProperty monthlyCommissionsTypeProperty() {
+        return monthlyCommissionsType;
     }
 
     public String getTypeOfPayment() {
@@ -271,16 +271,16 @@ public class MortgageCalculatorViewModel {
         if (!checkDoubleInput(firstPayment.get())) {
             return false;
         }
-        if (!checkDoubleInput(oneTimeComissions.get())) {
+        if (!checkDoubleInput(oneTimeCommissions.get())) {
             return false;
         }
-        if (!checkDoubleInput(monthlyComissions.get())) {
+        if (!checkDoubleInput(monthlyCommissions.get())) {
             return false;
         }
-        if (monthlyComissionsType.get().equals("")) {
+        if (monthlyCommissionsType.get().equals("")) {
             return false;
         }
-        if (oneTimeComissionsType.get().equals("")) {
+        if (oneTimeCommissionsType.get().equals("")) {
             return false;
         }
         return !typeOfPayment.get().equals("");
@@ -297,17 +297,17 @@ public class MortgageCalculatorViewModel {
                 ? PeriodType.YEAR : PeriodType.MONTH;
 
         double initialPayment = Double.parseDouble((firstPayment.get()));
-        double fixedComissionAmount = Double.parseDouble((oneTimeComissions.get()));
-        double monthlyComissionAmount = Double.parseDouble((monthlyComissions.get()));
+        double fixedComissionAmount = Double.parseDouble((oneTimeCommissions.get()));
+        double monthlyComissionAmount = Double.parseDouble((monthlyCommissions.get()));
 
         Commission fixedCommission = null;
         MonthlyCommission monthlyCommission = null;
 
         try {
-            fixedCommission = oneTimeComissionsType.get().equals("Percent")
+            fixedCommission = oneTimeCommissionsType.get().equals("Percent")
                     ? new PercentCommission(fixedComissionAmount)
                     : new FixedCommission(fixedComissionAmount);
-            monthlyCommission = monthlyComissionsType.get().equals("Percent")
+            monthlyCommission = monthlyCommissionsType.get().equals("Percent")
                     ? new PercentAmountMonthlyCommission(monthlyComissionAmount)
                     : new FixedMonthlyCommission(monthlyComissionAmount);
 
@@ -354,10 +354,10 @@ public class MortgageCalculatorViewModel {
                 .append("; Interest Rate = ").append(interestRate.get())
                 .append("; Loan Period = ").append(loanPeriod.get())
                 .append("; Loan Period Type: ").append(loanPeriodType.get())
-                .append("; Monthly Comissions = ").append(monthlyComissions.get())
-                .append("; Monthly Comissions Type: ").append(monthlyComissionsType.get())
-                .append("; One Time Comissions = ").append(oneTimeComissions.get())
-                .append("; One Time Comissions Type: ").append(oneTimeComissionsType.get())
+                .append("; Monthly Commissions = ").append(monthlyCommissions.get())
+                .append("; Monthly Commissions Type: ").append(monthlyCommissionsType.get())
+                .append("; One Time Commissions = ").append(oneTimeCommissions.get())
+                .append("; One Time Commissions Type: ").append(oneTimeCommissionsType.get())
                 .append("; Type Of Payment: ").append(typeOfPayment.get()).append(".");
         logger.log(message.toString());
         updateLogs();
@@ -380,10 +380,10 @@ public class MortgageCalculatorViewModel {
         public static final String CALCULATE_WAS_PRESSED = "Calculate. ";
         public static final String LOAN_PERIOD_TYPE_WAS_CHANGED =
                 "Loan Period Type was changed to ";
-        public static final String ONE_TIME_COMISSIONS_TYPE_WAS_CHANGED =
-                "One Time Comissions Type was changed to ";
-        public static final String MONTHLY_COMISSIONS_TYPE_WAS_CHANGED =
-                "Monthly Comissions Type was changed to ";
+        public static final String ONE_TIME_COMMISSIONS_TYPE_WAS_CHANGED =
+                "One Time Commissions Type was changed to ";
+        public static final String MONTHLY_COMMISSIONS_TYPE_WAS_CHANGED =
+                "Monthly Commissions Type was changed to ";
         public static final String INCORRECT_INPUT = "Incorrect input. ";
 
         private LogMessages() {

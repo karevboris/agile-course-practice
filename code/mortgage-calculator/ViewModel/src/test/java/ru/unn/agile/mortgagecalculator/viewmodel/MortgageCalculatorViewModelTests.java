@@ -17,10 +17,10 @@ public class MortgageCalculatorViewModelTests {
         viewModel.apartmentPriceProperty().set("200");
         viewModel.firstPaymentProperty().set("20");
         viewModel.interestRateProperty().set("3");
-        viewModel.monthlyComissionsProperty().set("1");
-        viewModel.monthlyComissionsTypeProperty().set("Rubles");
-        viewModel.oneTimeComissionsProperty().set("2");
-        viewModel.oneTimeComissionsTypeProperty().set("Percent");
+        viewModel.monthlyCommissionsProperty().set("1");
+        viewModel.monthlyCommissionsTypeProperty().set("Rubles");
+        viewModel.oneTimeCommissionsProperty().set("2");
+        viewModel.oneTimeCommissionsTypeProperty().set("Percent");
         viewModel.typeOfPaymentProperty().set("Annuity");
         viewModel.getLog().clear();
     }
@@ -44,10 +44,10 @@ public class MortgageCalculatorViewModelTests {
         assertEquals("", viewModel.getInterestRate());
         assertEquals("", viewModel.getLoanPeriod());
         assertEquals("", viewModel.getLoanPeriodType());
-        assertEquals("", viewModel.getMonthlyComissions());
-        assertEquals("", viewModel.getMonthlyComissionsType());
-        assertEquals("", viewModel.getOneTimeComissions());
-        assertEquals("", viewModel.getOneTimeComissionsType());
+        assertEquals("", viewModel.getMonthlyCommissions());
+        assertEquals("", viewModel.getMonthlyCommissionsType());
+        assertEquals("", viewModel.getOneTimeCommissions());
+        assertEquals("", viewModel.getOneTimeCommissionsType());
         assertEquals("", viewModel.getTypeOfPayment());
     }
 
@@ -110,7 +110,7 @@ public class MortgageCalculatorViewModelTests {
     @Test
     public void canCalculateWithCommisionInPercent() {
         setCorrectInputs();
-        viewModel.monthlyComissionsTypeProperty().set("Percent");
+        viewModel.monthlyCommissionsTypeProperty().set("Percent");
 
         viewModel.calculate();
 
@@ -159,9 +159,9 @@ public class MortgageCalculatorViewModelTests {
     }
 
     @Test
-    public void cantCalculateWithEmptyMonthlyComissionsProperty() {
+    public void cantCalculateWithEmptyMonthlyCommissionsProperty() {
         setCorrectInputs();
-        viewModel.monthlyComissionsProperty().set("");
+        viewModel.monthlyCommissionsProperty().set("");
 
         viewModel.calculate();
 
@@ -169,9 +169,9 @@ public class MortgageCalculatorViewModelTests {
     }
 
     @Test
-    public void cantCalculateWithEmptyMonthlyComissionsTypeProperty() {
+    public void cantCalculateWithEmptyMonthlyCommissionsTypeProperty() {
         setCorrectInputs();
-        viewModel.monthlyComissionsTypeProperty().set("");
+        viewModel.monthlyCommissionsTypeProperty().set("");
 
         viewModel.calculate();
 
@@ -179,9 +179,9 @@ public class MortgageCalculatorViewModelTests {
     }
 
     @Test
-    public void cantCalculateWithEmptyOneTimeComissionsProperty() {
+    public void cantCalculateWithEmptyOneTimeCommissionsProperty() {
         setCorrectInputs();
-        viewModel.oneTimeComissionsProperty().set("");
+        viewModel.oneTimeCommissionsProperty().set("");
 
         viewModel.calculate();
 
@@ -189,9 +189,9 @@ public class MortgageCalculatorViewModelTests {
     }
 
     @Test
-    public void cantCalculateWithEmptyOneTimeComissionsTypeProperty() {
+    public void cantCalculateWithEmptyOneTimeCommissionsTypeProperty() {
         setCorrectInputs();
-        viewModel.oneTimeComissionsTypeProperty().set("");
+        viewModel.oneTimeCommissionsTypeProperty().set("");
 
         viewModel.calculate();
 
@@ -242,8 +242,8 @@ public class MortgageCalculatorViewModelTests {
     @Test
     public void cantCalculateWithPercentBiggerThen100() {
         setCorrectInputs();
-        viewModel.monthlyComissionsProperty().set("101");
-        viewModel.monthlyComissionsTypeProperty().set("Percent");
+        viewModel.monthlyCommissionsProperty().set("101");
+        viewModel.monthlyCommissionsTypeProperty().set("Percent");
 
         viewModel.calculate();
 
@@ -291,10 +291,10 @@ public class MortgageCalculatorViewModelTests {
                 + ".*" + viewModel.getInterestRate()
                 + ".*" + viewModel.getLoanPeriod()
                 + ".*" + viewModel.getLoanPeriodType()
-                + ".*" + viewModel.getMonthlyComissions()
-                + ".*" + viewModel.getMonthlyComissionsType()
-                + ".*" + viewModel.getOneTimeComissions()
-                + ".*" + viewModel.getOneTimeComissionsType()
+                + ".*" + viewModel.getMonthlyCommissions()
+                + ".*" + viewModel.getMonthlyCommissionsType()
+                + ".*" + viewModel.getOneTimeCommissions()
+                + ".*" + viewModel.getOneTimeCommissionsType()
                 + ".*" + viewModel.getTypeOfPayment() + ".*"));
     }
 

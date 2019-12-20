@@ -17,17 +17,17 @@ public class MortgageCalculatorView {
     @FXML
     private TextField interestRate;
     @FXML
-    private TextField mothlyComissions;
+    private TextField monthlyCommissions;
     @FXML
-    private TextField oneTimeComissions;
+    private TextField oneTimeCommissions;
     @FXML
     private TextArea result;
     @FXML
     private ChoiceBox<String> loanPeriodType;
     @FXML
-    private ChoiceBox<String> mothlyComissionType;
+    private ChoiceBox<String> monthlyCommissionType;
     @FXML
-    private ChoiceBox<String> oneTimeComissionType;
+    private ChoiceBox<String> oneTimeCommissionType;
     @FXML
     private ChoiceBox<String> typeOfPayment;
     @FXML
@@ -39,14 +39,14 @@ public class MortgageCalculatorView {
         firstPayment.textProperty().bindBidirectional(viewModel.firstPaymentProperty());
         loanPeriod.textProperty().bindBidirectional(viewModel.loanPeriodProperty());
         interestRate.textProperty().bindBidirectional(viewModel.interestRateProperty());
-        mothlyComissions.textProperty().bindBidirectional(viewModel.monthlyComissionsProperty());
-        oneTimeComissions.textProperty().bindBidirectional(viewModel.oneTimeComissionsProperty());
+        monthlyCommissions.textProperty().bindBidirectional(viewModel.monthlyCommissionsProperty());
+        oneTimeCommissions.textProperty().bindBidirectional(viewModel.oneTimeCommissionsProperty());
         result.textProperty().bindBidirectional(viewModel.resultProperty());
         loanPeriodType.valueProperty().bindBidirectional(viewModel.loanPeriodTypeProperty());
-        mothlyComissionType.valueProperty().bindBidirectional(
-                viewModel.monthlyComissionsTypeProperty());
-        oneTimeComissionType.valueProperty().bindBidirectional(
-                viewModel.oneTimeComissionsTypeProperty());
+        monthlyCommissionType.valueProperty().bindBidirectional(
+                viewModel.monthlyCommissionsTypeProperty());
+        oneTimeCommissionType.valueProperty().bindBidirectional(
+                viewModel.oneTimeCommissionsTypeProperty());
         typeOfPayment.valueProperty().bindBidirectional(viewModel.typeOfPaymentProperty());
         calculate.setOnAction(event -> viewModel.calculate());
     }

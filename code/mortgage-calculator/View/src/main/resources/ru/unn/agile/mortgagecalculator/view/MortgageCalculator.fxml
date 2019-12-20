@@ -30,7 +30,7 @@
       <Text layoutX="56.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Loan Period" />
       <Text layoutX="56.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Interest rate 60 max" />
       <Text layoutX="27.0" layoutY="267.0" strokeType="OUTSIDE" strokeWidth="0.0" text="One-time commissions" />
-      <ChoiceBox fx:id="mothlyComissionType" layoutX="317.0" layoutY="283.0" prefWidth="150.0">
+      <ChoiceBox fx:id="monthlyCommissionType" layoutX="317.0" layoutY="283.0" prefWidth="150.0">
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Percent"/>
@@ -38,7 +38,7 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <ChoiceBox fx:id="oneTimeComissionType" layoutX="317.0" layoutY="250.0" prefWidth="150.0" >
+      <ChoiceBox fx:id="oneTimeCommissionType" layoutX="317.0" layoutY="250.0" prefWidth="150.0" >
          <items>
             <FXCollections fx:factory="observableArrayList">
                <String fx:value="Percent"/>
@@ -46,8 +46,8 @@
             </FXCollections>
          </items>
       </ChoiceBox>
-      <TextField fx:id="mothlyComissions" layoutX="157.0" layoutY="283.0" />
-      <TextField fx:id="oneTimeComissions" layoutX="157.0" layoutY="250.0" />
+      <TextField fx:id="monthlyCommissions" layoutX="157.0" layoutY="283.0" />
+      <TextField fx:id="oneTimeCommissions" layoutX="157.0" layoutY="250.0" />
       <Text layoutX="32.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Monthly commission" />
       <Text layoutX="43.0" layoutY="336.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Type of payment" />
       <ChoiceBox fx:id="typeOfPayment" layoutX="157.0" layoutY="319.0" prefWidth="150.0" >
