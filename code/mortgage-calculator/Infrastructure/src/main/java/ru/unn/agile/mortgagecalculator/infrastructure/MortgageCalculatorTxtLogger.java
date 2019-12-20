@@ -42,18 +42,18 @@ public class MortgageCalculatorTxtLogger implements MortgageCalculatorILogger {
     @Override
     public List<String> getLog() {
         BufferedReader reader;
-        ArrayList<String> log = new ArrayList<String>();
+        ArrayList<String> logs = new ArrayList<>();
         try {
             reader = new BufferedReader(new FileReader(filename));
             String line = reader.readLine();
             while (line != null) {
-                log.add(line);
+                logs.add(line);
                 line = reader.readLine();
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return log;
+        return logs;
     }
 
     private static String getNowDate() {
