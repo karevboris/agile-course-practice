@@ -34,7 +34,7 @@ public class MortgageCalculatorView {
     @FXML
     private Button calculate;
     @FXML
-    public TextArea areaLog;
+    private TextArea areaLog;
 
     @FXML
     void initialize() {
