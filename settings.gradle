@@ -56,6 +56,8 @@ include "code/temperature-converter/ViewModel"
 project(":code/temperature-converter/ViewModel").name = "temperature-converter-ViewModel"
 include "code/temperature-converter/View"
 project(":code/temperature-converter/View").name = "temperature-converter-View"
+include "code/temperature-converter/Infrastructure"
+project(":code/temperature-converter/Infrastructure").name = "temperature-converter-Infrastructure"
 // Власов Антон
 include "code/prime-number/Model"
 project(":code/prime-number/Model").name = "prime-number-Model"
@@ -65,6 +67,10 @@ project(":code/fractioncalculator").name = "fractioncalculator"
 // Гришин Дмитрий
 include "code/cross-sections/Model"
 project(":code/cross-sections/Model").name = "cross-sections-Model"
+include "code/cross-sections/ViewModel"
+project(":code/cross-sections/ViewModel").name = "cross-sections-ViewModel"
+include "code/cross-sections/View"
+project(":code/cross-sections/View").name = "cross-sections-View"
 // sorting
 include "code/sorting/Infrastructure"
 project(":code/sorting/Infrastructure").name = "sorting-Infrastructure"
@@ -90,6 +96,9 @@ project(":code/length-converter/View").name = "length-converter-View"
 
 include "code/length-converter/ViewModel"
 project(":code/length-converter/ViewModel").name = "length-converter-ViewModel"
+
+include "code/length-converter/Infrastructure"
+project(":code/length-converter/Infrastructure").name = "length-converter-Infrastructure"
 // Figures Volume Calculator
 include "code/figures-volume-calculator"
 project(":code/figures-volume-calculator").name = "figures-volume-calculator-Model"
@@ -114,6 +123,8 @@ include "code/deposit-calculator/view"
 project(":code/deposit-calculator/view").name = "deposit-calculator-view"
 include "code/deposit-calculator/viewmodel"
 project(":code/deposit-calculator/viewmodel").name = "deposit-calculator-viewmodel"
+include "code/deposit-calculator/infrastructure"
+project(":code/deposit-calculator/infrastructure").name = "deposit-calculator-infrastructure"
 // Кочетова Дарья
 include "code/matrix/Model"
 project(":code/matrix/Model").name = "matrix-model"
@@ -133,7 +144,9 @@ include "code/complex-number-calculator/View"
 project(":code/complex-number-calculator/View").name = "complex-number-calculator-View"
 include "code/complex-number-calculator/ViewModel"
 project(":code/complex-number-calculator/ViewModel").name = "complex-number-calculator-ViewModel"
-// Купцова Алеся
+// Vector Operations
+include "code/lab1-tdd-vector_operations"
+project(":code/lab1-tdd-vector_operations").name = "lab1-tdd-vector_operations-Model"
 // Кучков Иван
 // quadratic equation
 include "code/quadratic-equation/Model"
@@ -142,6 +155,8 @@ include "code/quadratic-equation/ViewModel"
 project(":code/quadratic-equation/ViewModel").name = "quadratic-equation-ViewModel"
 include "code/quadratic-equation/View"
 project(":code/quadratic-equation/View").name = "quadratic-equation-View"
+include "code/quadratic-equation/Infrastructure"
+project(":code/quadratic-equation/Infrastructure").name = "quadratic-equation-Infrastructure"
 // Triangle
 include "code/triangle/Model"
 project(":code/triangle/Model").name = "triangle-Model"
@@ -163,9 +178,13 @@ include "code/queue/View"
 project(":code/queue/View").name = "queue-View"
 include "code/queue/ViewModel"
 project(":code/queue/ViewModel").name = "queue-ViewModel"
-// Нестеров Александр
-include "code/bit-array"
-project(":code/bit-array").name = "bit-array-Model"
+// Нестеров Александр - Bit-array
+include "code/bit-array/Model"
+project(":code/bit-array/Model").name = "bit-array-Model"
+include "code/bit-array/View"
+project(":code/bit-array/View").name = "bit-array-View"
+include "code/bit-array/ViewModel"
+project(":code/bit-array/ViewModel").name = "bit-array-ViewModel"
 // Нечесанов Владимир
 // Овчарук Олег
 include "code/polynomialcalculator"
@@ -217,6 +236,10 @@ project(":code/polygon-area/ViewModel").name = "polygon-area-ViewModel"
 // Федорова Дарья
 include "code/currency-converter/Model"
 project(":code/currency-converter/Model").name = "currency-converter-Model"
+include "code/currency-converter/View"
+project(":code/currency-converter/View").name = "currency-converter-View"
+include "code/currency-converter/ViewModel"
+project(":code/currency-converter/ViewModel").name = "currency-converter-ViewModel"
 // datastructure-set
 include "code/datastructure-set/Model"
 project(":code/datastructure-set/Model").name = "datastructure-set-Model"
@@ -244,6 +267,9 @@ project(":code/mortgage-calculator/View").name = "mortgage-calculator-View"
 
 include "code/mortgage-calculator/ViewModel"
 project(":code/mortgage-calculator/ViewModel").name = "mortgage-calculator-ViewModel"
+
+include "code/mortgage-calculator/Infrastructure"
+project(":code/mortgage-calculator/Infrastructure").name = "mortgage-calculator-Infrastructure"
 // Шумихин Сергей
 include "code/binary-tree/Model"
 project(":code/binary-tree/Model").name = "binary-tree-Model"
